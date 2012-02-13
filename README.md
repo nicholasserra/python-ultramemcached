@@ -1,2 +1,2 @@
 #Overview
-A drop in replacement for python-memcached to use [ultramemcached](https://github.com/esnme/ultramemcached) as an interface instead of python sockets. Requires ultramemcached. Usage is the same as [python-memcached](http://www.tummy.com/Community/software/python-memcached/) .
+A drop in replacement for python-memcached to use [ultramemcache](https://github.com/esnme/ultramemcache) as an interface instead of python sockets. Requires ultramemcache. Usage is the same as [python-memcached](http://www.tummy.com/Community/software/python-memcached/) .
