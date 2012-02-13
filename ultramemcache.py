@@ -48,7 +48,7 @@ import socket
 import time
 import os
 import re
-import umemcached
+import umemcache
 try:
     import cPickle as pickle
 except ImportError:
@@ -931,7 +931,7 @@ class _Host(object):
 
     def _make_conn(func, *args, **kwargs):
         def wrapper(self, *args, **kwargs):
-            m = umemcached.Client(self.host)
+            m = umemcache.Client(self.host)
             m.connect()
             return func(self, m, *args, **kwargs)
             m.disconnect()
