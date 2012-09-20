@@ -1007,11 +1007,11 @@ class _Host(object):
 
 
 def _doctest():
-    import doctest, memcache
+    import doctest, ultramemcache
     servers = ["127.0.0.1:11211"]
     mc = Client(servers, debug=1)
     globs = {"mc": mc}
-    return doctest.testmod(memcache, globs=globs)
+    return doctest.testmod(ultramemcache, globs=globs)
 
 if __name__ == "__main__":
     failures = 0
