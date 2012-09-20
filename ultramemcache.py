@@ -718,11 +718,11 @@ class Client(local):
                     return None
 
                 if cmd == 'gets':
-                    val, flags, cas_id = server.gets(key)
+                    val, flags, cas_id = response
                     if self.cache_cas:
                         self.cas_ids[key] = cas_id
                 else:
-                    val, flags = server.get(key)
+                    val, flags = response
                 if not val:
                     return None
                 try:
