@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='python-ultramemcached',
-    version='0.0.2',
+    version='0.0.3',
     install_requires=['umemcache'],
     author='Nicholas Serra',
     author_email='nick@528hazelwood.com',
