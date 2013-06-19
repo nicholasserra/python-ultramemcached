@@ -255,6 +255,11 @@ class Client(local):
             data.append(s.stats())
         return(data)
 
+    def flush_all(self):
+        """Expire all data in memcache servers that are reachable."""
+        for s in self.servers:
+            s.flush()
+
     def debuglog(self, str):
         if self.debug:
             sys.stderr.write("MemCached: %s\n" % str)
@@ -682,7 +687,7 @@ class Client(local):
                 args = (key, store_info[0], time, store_info[1],
                         self.cas_ids[key], store_info[2])
             else:
-                
+
                 args = (key, store_info[2], time, store_info[0])
 
             try:
@@ -994,7 +999,11 @@ class _Host(object):
     @_make_conn
     def stats(self, m):
         return m.stats()
-    
+
+    @_make_conn
+    def flush(self, m):
+        return m.flush_all()
+
     def __str__(self):
         d = ''
         if self.deaduntil:
