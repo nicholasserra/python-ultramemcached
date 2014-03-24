@@ -16,3 +16,18 @@ mc.set("key", "1")   # note that the key used for incr/decr must be a string.
 mc.incr("key")
 mc.decr("key")
 ````
+
+#Usage with Django
+To use this package with Django, implement your own subclass of Django's `BaseMemcachedCache` backend like this:
+
+```python
+from django.core.cache.backends.memcached import BaseMemcachedCache
+
+class UltraMemcachedCache(BaseMemcachedCache):
+    "An implementation of a cache binding using python-ultramemcached"
+    def __init__(self, server, params):
+        import ultramemcache
+        super(MemcachedCache, self).__init__(server, params,
+                                             library=ultramemcache,
+                                             value_not_found_exception=ValueError)
+```
