@@ -1,3 +1,5 @@
+Travis test status: [![Build Status](https://travis-ci.org/nicholasserra/python-ultramemcached.svg?branch=master)](https://travis-ci.org/nicholasserra/python-ultramemcached)
+
 #Overview
 A drop in replacement for python-memcached to use [ultramemcache](https://github.com/esnme/ultramemcache) as an interface instead of python sockets. Requires ultramemcache. Usage is the same as [python-memcached](http://www.tummy.com/Community/software/python-memcached/) .
 
