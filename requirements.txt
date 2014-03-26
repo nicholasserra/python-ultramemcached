@@ -1,1 +1,1 @@
-umemcache
+umemcache==1.6.3
