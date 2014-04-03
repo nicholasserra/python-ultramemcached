@@ -4,6 +4,7 @@ services:
 python:
 - '2.6'
 - '2.7'
+- 'pypy'
 install: 
 - pip install -r requirements.txt
 script: python ultramemcache.py
