@@ -914,6 +914,7 @@ class _Host(object):
         self.host = host
 
         self.buffer = ''
+        self.connection = None
 
     def debuglog(self, str):
         if self.debug:
@@ -936,10 +937,12 @@ class _Host(object):
 
     def _make_conn(func, *args, **kwargs):
         def wrapper(self, *args, **kwargs):
+            if self.connection:
+                return func(self, self.connection, *args, **kwargs)
             m = umemcache.Client(self.host)
             m.connect()
+            self.connection = m
             return func(self, m, *args, **kwargs)
-            m.disconnect()
         return wrapper
     
     @_make_conn
