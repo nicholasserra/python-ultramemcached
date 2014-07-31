@@ -1,4 +1,5 @@
 language: python
+env: CFLAGS="-Wno-error"
 services:
   - memcached
 python:

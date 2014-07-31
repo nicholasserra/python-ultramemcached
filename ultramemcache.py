@@ -914,6 +914,7 @@ class _Host(object):
         self.host = host
 
         self.buffer = ''
+        self.connection = None
 
     def debuglog(self, str):
         if self.debug:
@@ -936,41 +937,43 @@ class _Host(object):
 
     def _make_conn(func, *args, **kwargs):
         def wrapper(self, *args, **kwargs):
+            if self.connection:
+                return func(self, self.connection, *args, **kwargs)
             m = umemcache.Client(self.host)
             m.connect()
+            self.connection = m
             return func(self, m, *args, **kwargs)
-            m.disconnect()
         return wrapper
-    
+
     @_make_conn
     def add(self, m, key, val, timeout, flags):
         return m.add(key, val, timeout, flags)
-        
+
     @_make_conn
     def append(self, m, key, val, timeout, flags):
         return m.append(key, val, timeout, flags)
-        
+
     @_make_conn
     def prepend(self, m, key, val, timeout, flags):
         return m.prepend(key, val, timeout, flags)
-        
+
     @_make_conn
     def replace(self, m, key, val, timeout, flags):
         return m.replace(key, val, timeout, flags)
-    
+
     @_make_conn
     def get(self, m, key):
         response = m.get(key)
         return response
-    
+
     @_make_conn
     def gets(self, m, key):
         return m.gets(key)
-        
+
     @_make_conn
     def get_multi(self, m, keys):
         return m.get_multi(keys)
-    
+
     @_make_conn
     def set(self, m, key, val, timeout, flags):
         try:
@@ -979,19 +982,19 @@ class _Host(object):
             #catch server max value and key length error for tests
             response = None
         return response
-    
+
     @_make_conn
     def cas(self, m, key, val, timeout, flags):
         return m.cas(key, val, timeout, flags)
-    
+
     @_make_conn
     def delete(self, m, key, time=0):
         return m.delete(key, time)
-        
+
     @_make_conn
     def incr(self, m, key, delta):
         return m.incr(key, delta)
-        
+
     @_make_conn
     def decr(self, m, key, delta):
         return m.decr(key, delta)
