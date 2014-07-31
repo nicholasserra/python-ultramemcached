@@ -1,7 +1,5 @@
 language: python
-env:
-- CXXFLAGS="-Wno-error"
-- CFLAGS="-Wno-error"
+env: CFLAGS="-Wno-error"
 services:
   - memcached
 python:
